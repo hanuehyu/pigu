@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyNFT is ERC721, Ownable {
+    uint256 private _currentTokenId;
+
+    constructor(string memory name, string memory symbol) ERC721(name, symbol) {
+        _currentTokenId = 0;
+    }
+
+    function mint(address to) public onlyOwner {
+        _mint(to, _currentTokenId);
+        _currentTokenId++;
+    }
+}
